@@ -77,6 +77,11 @@ public class PolishFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getActivity().setTitle("My Collection");
+    }
 
     //interface
     PolishFragmentListener mListener;

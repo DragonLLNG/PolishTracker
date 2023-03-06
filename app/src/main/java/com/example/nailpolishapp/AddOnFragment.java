@@ -90,6 +90,8 @@ public class AddOnFragment extends Fragment {
             }
         });
 
+        getActivity().setTitle("Add Polish");
+
     }
 
 
