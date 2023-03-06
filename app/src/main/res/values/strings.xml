@@ -37,4 +37,9 @@
     <string name="unlike">Remove</string>
     <string name="logout">Log out</string>
     <string name="username">User Name</string>
+    <string name="upload">upload</string>
+
+
+    <string name="error">Error</string>
+    <string name="ok">OK</string>
 </resources>

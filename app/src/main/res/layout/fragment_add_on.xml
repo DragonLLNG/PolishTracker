@@ -44,7 +44,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.442"
         app:layout_constraintStart_toEndOf="@+id/textViewName"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -90,12 +91,12 @@
         android:id="@+id/imageViewUpload"
         android:layout_width="79dp"
         android:layout_height="69dp"
+        android:contentDescription="@string/upload"
         android:src="@android:drawable/ic_menu_upload"
-        tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="308dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        tools:ignore="ImageContrastCheck" />
 
 
     <Button
@@ -103,6 +104,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/add_label"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/buttonCancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
@@ -113,6 +115,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/cancel_label"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
