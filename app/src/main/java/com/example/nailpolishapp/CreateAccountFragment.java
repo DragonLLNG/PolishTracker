@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,6 +116,7 @@ public class CreateAccountFragment extends Fragment {
         });
 
 
+        //Registration using email password
         binding.buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,12 +176,14 @@ public class CreateAccountFragment extends Fragment {
                                             HashMap<String, Object> data = new HashMap<>();
                                             data.put("name", name);
                                             data.put("uid", mAuth.getCurrentUser().getUid());
-                                            data.put("isOnline", true);
+                                            //data.put("isOnline", true);
 
                                             db.collection("users").document(mAuth.getCurrentUser().getUid()).set(data)
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
+                                                            Toast toast = Toast.makeText(getContext(), "Register Successful!", Toast.LENGTH_LONG);
+                                                            toast.show();
                                                             mListener.gotoMenu();
                                                         }
                                                     });
@@ -197,10 +199,10 @@ public class CreateAccountFragment extends Fragment {
                                         }
                                     }
                                 });
-                            //Duplicate email
+                            //Handle user invalid inputs
                             } else {
                                 alertBuilder.setTitle(R.string.error)
-                                        .setMessage("Sign up failed due to duplicate email")
+                                        .setMessage(task.getException().toString())
                                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
