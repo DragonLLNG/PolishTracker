@@ -1,15 +1,20 @@
 package com.example.nailpolishapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.example.nailpolishapp.databinding.FragmentLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginFragment extends Fragment {
 
+    private final String TAG="final";
     private FirebaseAuth mAuth;
     public LoginFragment() {
         // Required empty public constructor
@@ -43,15 +49,34 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 String email = binding.editTextEmail.getText().toString();
                 String password = binding.editTextPassword.getText().toString();
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext());
                 if(email.isEmpty()){
-                    Toast.makeText(getActivity(), "Enter valid email!", Toast.LENGTH_SHORT).show();
+                    alertBuilder.setTitle(R.string.error)
+                            .setMessage("Email is required")
+                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Log.d(TAG, "onClick: ");
+                                }
+                            });
+                    alertBuilder.create().show();
                 } else if (password.isEmpty()){
-                    Toast.makeText(getActivity(), "Enter valid password!", Toast.LENGTH_SHORT).show();
+                    alertBuilder.setTitle(R.string.error)
+                            .setMessage("Password is required")
+                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Log.d(TAG, "onClick: ");
+                                }
+                            });
+                    alertBuilder.create().show();
                 } else {
                     mAuth = FirebaseAuth.getInstance();
                     mAuth.signInWithEmailAndPassword(email, password)
@@ -59,9 +84,17 @@ public class LoginFragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()) {
-
+                                        mListener.gotoMenu();
                                     } else {
-                                        Toast.makeText(getActivity(), "Can't login!", Toast.LENGTH_SHORT).show();
+                                        alertBuilder.setTitle(R.string.error)
+                                                .setMessage("Can't login! Wrong email or password!")
+                                                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                        Log.d(TAG, "onClick: ");
+                                                    }
+                                                });
+                                        alertBuilder.create().show();
                                     }
                                 }
                             });
@@ -89,6 +122,6 @@ public class LoginFragment extends Fragment {
 
     interface LoginListener {
         void createNewAccount();
-
+        void gotoMenu();
     }
 }
