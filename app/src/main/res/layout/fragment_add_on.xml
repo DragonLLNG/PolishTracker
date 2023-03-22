@@ -44,8 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.442"
         app:layout_constraintStart_toEndOf="@+id/textViewName"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -77,26 +76,24 @@
             android:text="@string/polish_dipping_label" />
     </RadioGroup>
 
-<!--    <Button-->
-<!--        android:id="@+id/buttonUpload"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:text="@string/upload_label"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />-->
+    <!--    <Button-->
+    <!--        android:id="@+id/buttonUpload"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:text="@string/upload_label"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />-->
 
     <ImageView
         android:id="@+id/imageViewUpload"
-        android:layout_width="79dp"
-        android:layout_height="69dp"
-        android:contentDescription="@string/upload"
+        android:layout_width="63dp"
+        android:layout_height="56dp"
         android:src="@android:drawable/ic_menu_upload"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        tools:ignore="ImageContrastCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
 
     <Button
@@ -120,7 +117,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-
+    <TextView
+        android:id="@+id/textViewUploadImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/uploadimage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewUpload" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
