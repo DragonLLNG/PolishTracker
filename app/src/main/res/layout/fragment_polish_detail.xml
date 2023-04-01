@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:background="@drawable/gradient"
     tools:context=".PolishDetailFragment">
 
     <TextView
@@ -13,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/textView"
+        android:textColor="@color/pink"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -25,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/textView"
+        android:textColor="@color/pink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.001"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/textView"
+        android:textColor="@color/pink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="@string/note"
+        android:textColor="@color/pink"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
 
@@ -70,7 +75,7 @@
         android:hint="@string/comment"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:textColorHint="#757575"
+        android:textColorHint="@color/brightpink"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         android:importantForAutofill="no" />
@@ -81,19 +86,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/addComment"
-        android:textColor="@color/white"
+        android:fontFamily="@font/baumans"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/pink"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextNote" />
 
     <ImageView
         android:id="@+id/imageViewFavorite"
-        android:layout_width="57dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="41dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="56dp"
         android:contentDescription="@string/heart"
         android:src="@drawable/ic_heart_not_favorite"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.68"
         app:layout_constraintStart_toEndOf="@+id/editTextNote"
         app:layout_constraintTop_toBottomOf="@+id/imageViewPolish" />
 
@@ -103,18 +112,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/textView"
+        android:textColor="@color/pink"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
 
     <ImageView
         android:id="@+id/imageViewDelete"
-        android:layout_width="55dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/ic_delete"
+        android:layout_width="41dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="48dp"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/ic_trashcan"
         app:layout_constraintStart_toEndOf="@+id/imageViewFavorite"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewPolish"
-        android:contentDescription="@string/todo" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewPolish" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

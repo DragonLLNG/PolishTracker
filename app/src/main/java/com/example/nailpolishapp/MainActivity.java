@@ -1,21 +1,30 @@
 package com.example.nailpolishapp;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+
 
 public class MainActivity extends AppCompatActivity implements LoginFragment.LoginListener, CreateAccountFragment.CreateAccountListener, MenuFragment.MenuListener,
         AddOnFragment.AddOnListener, PolishFragment.PolishFragmentListener, PolishDetailFragment.DetailListener, FavoriteFragment.FavoriteListListener {
 
+    BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-        //Verify the current user on FirebaseAuth to keep them login
+            //Verify the current user on FirebaseAuth to keep them login
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_main);
         if (mAuth.getCurrentUser() == null) {
@@ -27,7 +36,10 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                     .add(R.id.containerView, new MenuFragment())
                     .commit();
         }
+
     }
+
+
 
 
     @Override

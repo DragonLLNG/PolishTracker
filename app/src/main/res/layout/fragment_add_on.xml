@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:background="@drawable/gradient"
     tools:context=".AddOnFragment" >
 
     <TextView
@@ -14,6 +15,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="52dp"
         android:text="@string/polish_type_label"
+        android:textColor="@color/pink"
+        android:fontFamily="@font/baumans"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,6 +30,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/polish_name_label"
+        android:textColor="@color/pink"
+        android:fontFamily="@font/baumans"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,12 +44,16 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/name_label"
+        android:textColor="@color/pinkrpowder"
+        android:fontFamily="@font/baumans"
         android:inputType="textPersonName"
+        android:textColorHint="@color/brightpink"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.442"
         app:layout_constraintStart_toEndOf="@+id/textViewName"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -61,47 +70,52 @@
             android:id="@+id/checkboxButtonRegular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/polish_regular_label" />
+            android:fontFamily="@font/baumans"
+            android:text="@string/polish_regular_label"
+            android:buttonTint="@color/pinkrgel"
+            android:textColor="#D81B60" />
 
         <CheckBox
             android:id="@+id/checkboxButtonGel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/polish_gel_label" />
+            android:text="@string/polish_gel_label"
+            android:buttonTint="@color/pinkrgel"
+            android:textColor="#D81B60"
+            android:fontFamily="@font/baumans"/>
 
         <CheckBox
             android:id="@+id/checkboxButtonDipping"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/polish_dipping_label" />
+            android:fontFamily="@font/baumans"
+            android:text="@string/polish_dipping_label"
+            android:buttonTint="@color/pinkrgel"
+            android:textColor="#D81B60" />
     </RadioGroup>
 
-    <!--    <Button-->
-    <!--        android:id="@+id/buttonUpload"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:text="@string/upload_label"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />-->
 
     <ImageView
         android:id="@+id/imageViewUpload"
         android:layout_width="63dp"
         android:layout_height="56dp"
-        android:src="@android:drawable/ic_menu_upload"
+        android:contentDescription="@string/todofix"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:srcCompat="@drawable/ic_img"
+        tools:ignore="ImageContrastCheck" />
 
     <Button
         android:id="@+id/buttonAddOnPolish"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/baumans"
         android:text="@string/add_label"
-        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textColor="#D81B60"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonCancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
@@ -112,7 +126,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/cancel_label"
-        android:textColor="@color/white"
+        android:fontFamily="@font/baumans"
+        android:textColor="@color/black"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -121,7 +139,10 @@
         android:id="@+id/textViewUploadImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/baumans"
         android:text="@string/uploadimage"
+        android:textColor="#D81B60"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

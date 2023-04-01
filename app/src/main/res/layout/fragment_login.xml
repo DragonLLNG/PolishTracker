@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:background="@drawable/gradient"
     tools:context=".LoginFragment" >
 
     <EditText
@@ -13,6 +14,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/email_label"
+        android:fontFamily="@font/baumans"
+        android:textColorHint="@color/brightpink"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,6 +30,8 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/password_label"
+        android:textColorHint="@color/brightpink"
+        android:fontFamily="@font/baumans"
         android:inputType="textPassword"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,19 +44,27 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/baumans"
         android:text="@string/login_label"
-        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:textColor="@color/pink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
     <Button
         android:id="@+id/buttonCreateNewAccount"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/baumans"
         android:text="@string/create_new_account_label"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:textColor="@color/pink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />

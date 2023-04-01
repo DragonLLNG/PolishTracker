@@ -4,26 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     android:padding="10dp"
-    tools:context=".MenuFragment" >
+    tools:context=".MenuFragment"
+    tools:layout_editor_absoluteX="-1dp"
+    tools:layout_editor_absoluteY="111dp">
+
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/baumans"
+        android:text="@string/logout"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonFavorite" />
 
     <Button
         android:id="@+id/buttonList"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/baumans"
         android:text="@string/list_label"
-        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textColor="@color/pink"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserName" />
 
     <Button
         android:id="@+id/buttonAddOn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/baumans"
         android:text="@string/add_label"
-        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textColor="@color/pink"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonList" />
 
@@ -31,21 +61,27 @@
         android:id="@+id/buttonFavorite"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/baumans"
         android:text="@string/favorite_label"
-        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textColor="@color/pink"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonAddOn" />
 
-    <Button
-        android:id="@+id/buttonLogout"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textViewUserName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="@string/logout"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:fontFamily="@font/baumans"
+        android:text="TextView"
+        android:textColor="@color/pink"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

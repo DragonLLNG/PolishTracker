@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/white"
     tools:context=".WelcomeActivity">
+
 
     <TextView
         android:id="@+id/textViewWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/baumans"
         android:text="@string/welcome"
-        android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textColor="@color/pink"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,20 +26,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/baumans"
+        android:backgroundTint="@color/white"
         android:text="@string/start"
-        android:textColor="#F3F3F3"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:textColor="@color/pink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewWelcome" />
+
+
 
     <ImageView
         android:id="@+id/imageViewLogo"
         android:layout_width="186dp"
         android:layout_height="178dp"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toTopOf="@+id/textViewWelcome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_logo"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/ic_logo3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

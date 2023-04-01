@@ -36,13 +36,15 @@
     <string name="todo">TODO</string>
     <string name="unlike">Remove</string>
     <string name="logout">Log out</string>
-    <string name="username">User Name</string>
+    <string name="username">Name</string>
 
     <string name="error">Error</string>
     <string name="ok">OK</string>
     <string name="welcome">Welcome to Polish Tracker</string>
     <string name="start">Start</string>
     <string name="uploadimage">Upload an image</string>
+    <string name="main_menu">Main menu</string>
+    <string name="todofix">TODO</string>
 
 
 </resources>

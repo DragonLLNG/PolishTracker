@@ -266,6 +266,7 @@ public class AddOnFragment extends Fragment {
                     e.printStackTrace();
                 }
 
+                /*
                 binding.imageViewUpload.setImageBitmap(selectedImageBitmap);
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -273,6 +274,8 @@ public class AddOnFragment extends Fragment {
                 String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
 
                 polish.imageURL = imageEncoded;
+                
+                 */
 
             }
         }

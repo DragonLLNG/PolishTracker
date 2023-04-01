@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nailpolishapp.databinding.FragmentFavoriteBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.EventListener;
@@ -54,6 +55,7 @@ public class FavoriteFragment extends Fragment {
         setHasOptionsMenu(true);
 
     }
+
 
 
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
