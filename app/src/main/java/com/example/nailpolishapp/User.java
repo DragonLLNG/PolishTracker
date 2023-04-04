@@ -1,10 +1,10 @@
 package com.example.nailpolishapp;
 
 public class User {
-    public User(String name, String email, String password) {
+    String uid, name;
 
+    public User() {
     }
-    String uid, name, email, password;
 
     public User(String uid, String name) {
         this.uid = uid;
