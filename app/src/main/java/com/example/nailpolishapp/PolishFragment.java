@@ -149,17 +149,7 @@ public class PolishFragment extends Fragment {
             holder.polishName.setText(polish.getName());
             holder.polishType.setText(polish.getType().toString());
             holder.date.setText(polish.getCreatedAt().toString());
-
-//            try {
-//                selectedImageBitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), Uri.parse(polish.getImageURL()));
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            holder.polishImage.setImageBitmap(selectedImageBitmap);
-            //holder.polishImage.setImageResource(polish.getImageURL().);
-
-
+            holder.polishImage.setImageBitmap(selectedImageBitmap);
             if (polish.imageURL!=null && !polish.imageURL.contains("http")) {
                 try {
                     Bitmap imageBitmap = decodeFromFirebaseBase64(polish.imageURL);
@@ -178,7 +168,6 @@ public class PolishFragment extends Fragment {
 //                        .centerCrop()
                         .into(holder.polishImage);
             }
-
 
 
         }

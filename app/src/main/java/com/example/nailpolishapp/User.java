@@ -1,14 +1,17 @@
 package com.example.nailpolishapp;
 
 public class User {
-    public User() {
+    public User(String name, String email, String password) {
+
     }
-    String uid, name;
+    String uid, name, email, password;
 
     public User(String uid, String name) {
         this.uid = uid;
         this.name = name;
+
     }
+
 
     public String getUid() {
         return uid;
@@ -25,4 +28,5 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
 }

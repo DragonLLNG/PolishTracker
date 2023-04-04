@@ -52,60 +52,7 @@ public class CreateAccountFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-  /*      binding.buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.login();
-            }
-        });
 
-        binding.buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = binding.editTextEmail.getText().toString();
-                String password = binding.editTextPassword.getText().toString();
-
-                if(email.isEmpty()){
-                    Toast.makeText(getActivity(), "Enter valid email!", Toast.LENGTH_SHORT).show();
-                } else if (password.isEmpty()||password.length()<8) {
-                    Toast.makeText(getActivity(), "Enter valid password! Password length must be at least 8 characters", Toast.LENGTH_SHORT).show();
-                    mAuth = FirebaseAuth.getInstance();
-                    mAuth.createUserWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if(task.isSuccessful()) {
-                                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                        //getCurrentUser is from cache in app; not an API call
-                                        //can also refresh cache
-
-                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                                .build();
-
-                                        user.updateProfile(profileUpdates)
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if(task.isSuccessful()) {
-                                                            mListener.gotoMenu();
-                                                            Log.d(TAG, "onComplete: User profile updated.");
-                                                        } else {
-                                                            Log.d(TAG, "onComplete: Error updating profile");
-                                                        }
-                                                    }
-                                                });
-
-                                    } else {
-                                        Toast.makeText(getActivity(), "Can't sign up!", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                }
-            }
-        });
-
-        getActivity().setTitle("Create New Account");
-*/
 
 
         binding.buttonCancel.setOnClickListener(new View.OnClickListener() {

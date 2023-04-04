@@ -38,7 +38,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-storage:20.1.0'
+    implementation 'com.google.firebase:firebase-database:20.1.0'
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
@@ -47,4 +49,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    testImplementation 'org.powermock:powermock:1.6.5'
+    testImplementation 'org.powermock:powermock-module-junit4:1.6.5'
+    testImplementation 'org.powermock:powermock-api-mockito:1.6.5'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
 }

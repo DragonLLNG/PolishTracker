@@ -3,18 +3,15 @@ package com.example.nailpolishapp;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.nailpolishapp.databinding.FragmentLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginFragment extends Fragment {
 
     private final String TAG="final";
-    private FirebaseAuth mAuth;
+    public FirebaseAuth mAuth;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -112,7 +109,7 @@ public class LoginFragment extends Fragment {
         getActivity().setTitle(R.string.login_label);
     }
 
-    LoginListener mListener;
+    public LoginListener mListener;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -120,7 +117,7 @@ public class LoginFragment extends Fragment {
         mListener = (LoginListener) context;
     }
 
-    interface LoginListener {
+    public interface LoginListener {
         void createNewAccount();
         void gotoMenu();
     }
