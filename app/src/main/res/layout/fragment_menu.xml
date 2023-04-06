@@ -14,7 +14,8 @@
         android:id="@+id/buttonLogout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="44dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/baumans"
         android:text="@string/logout"
@@ -22,14 +23,14 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonFavorite" />
 
     <Button
         android:id="@+id/buttonList"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="36dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/baumans"
         android:text="@string/list_label"
@@ -37,31 +38,29 @@
         android:textColor="@color/pink"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUserName" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonAddOn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="28dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/baumans"
         android:text="@string/add_label"
         android:textAllCaps="false"
         android:textColor="@color/pink"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonList" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserName" />
 
     <Button
         android:id="@+id/buttonFavorite"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="36dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/baumans"
         android:text="@string/favorite_label"
@@ -69,19 +68,43 @@
         android:textColor="@color/pink"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAddOn" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonList" />
 
     <TextView
         android:id="@+id/textViewUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/baumans"
         android:text="TextView"
         android:textColor="@color/pink"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewProfile" />
+
+    <ImageView
+        android:id="@+id/imageViewProfile"
+        android:layout_width="116dp"
+        android:layout_height="131dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/ic_profile"
+        app:layout_constraintEnd_toStartOf="@+id/buttonList"
+        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:itemTextColor="@color/pinkrpowder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:itemActiveIndicatorStyle="@color/brightpink"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

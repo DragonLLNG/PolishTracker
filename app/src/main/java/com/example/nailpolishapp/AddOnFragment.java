@@ -207,14 +207,7 @@ public class AddOnFragment extends Fragment {
                             }
                         });
                     }
-
-
-
-
                 }
-
-
-
             }
 
         });
@@ -258,12 +251,16 @@ public class AddOnFragment extends Fragment {
 
 
                 binding.imageViewUpload.setImageBitmap(selectedImageBitmap);
+                binding.imageViewUpload.getLayoutParams().height = 400;
+                binding.imageViewUpload.getLayoutParams().width = 400;
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 selectedImageBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
                 String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
 
                 polish.imageURL = imageEncoded;
+                binding.textViewUploadImage.setVisibility(View.INVISIBLE);
+
                 
 
 

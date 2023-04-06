@@ -30,8 +30,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="textView">Text view</string>
     <string name="note">Note:</string>
-    <string name="comment">Comment</string>
-    <string name="addComment">Add Note</string>
+    <string name="comment">Add a comment</string>
+    <string name="addComment">Post</string>
     <string name="heart">Heart Image</string>
     <string name="todo">TODO</string>
     <string name="unlike">Remove</string>
@@ -45,6 +45,7 @@
     <string name="uploadimage">Upload an image</string>
     <string name="main_menu">Main menu</string>
     <string name="todofix">TODO</string>
+    <string name="remove">Remove</string>
 
 
 </resources>
