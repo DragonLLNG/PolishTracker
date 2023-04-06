@@ -1,5 +1,7 @@
 package com.example.nailpolishapp;
 
+import static com.example.nailpolishapp.PolishFragment.decodeFromFirebaseBase64;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -55,7 +57,9 @@ public class PolishDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if (getArguments() != null) {
+            mParamPolish = (Polish) getArguments().getSerializable(ARG_PARAM_POLISH);
+        }
         setHasOptionsMenu(true);
 
     }
@@ -80,6 +84,228 @@ public class PolishDetailFragment extends Fragment {
         binding = FragmentPolishDetailBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        binding.textViewPolishName.setText(mParamPolish.getName());
+        binding.textViewPolishType.setText(mParamPolish.getType().toString());
+        binding.textViewDate.setText(mParamPolish.getCreatedAt().toString());
+        if(mParamPolish.comment!=null) {
+            binding.textViewComment.setText(mParamPolish.getComment());
+        }
+        else{
+            binding.textViewComment.setText("");
+        }
+
+
+        if (mParamPolish.imageURL!=null && !mParamPolish.imageURL.contains("http")) {
+            try {
+                Bitmap imageBitmap = decodeFromFirebaseBase64(mParamPolish.imageURL);
+                Bitmap resizedBitmap = Bitmap.createScaledBitmap(
+                        imageBitmap, 200, 200, false);
+
+                binding.imageViewPolish.setImageBitmap(resizedBitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+
+            Picasso.get()
+                    .load(mParamPolish.imageURL)
+//                    .resize(MAX_WIDTH, MAX_HEIGHT)
+//                        .centerCrop()
+                    .into(binding.imageViewPolish);
+        }
+
+        if (mParamPolish.liked==true){
+            binding.imageViewFavorite.setImageResource(R.drawable.ic_heart_favorite);
+        }
+        else {
+            binding.imageViewFavorite.setImageResource(R.drawable.ic_heart_not_favorite);
+        }
+
+
+
+        binding.imageViewPolish.setOnClickListener(new DoubleClickListener() {
+            Boolean clicked = true;
+            @Override
+            public void onSingleClick(View v) {
+                clicked = true;
+            }
+
+            @Override
+            public void onDoubleClick(View v) {
+                if (clicked) {
+                    clicked = false;
+                    binding.imageViewFavorite.setImageResource(R.drawable.ic_heart_favorite);
+                    FirebaseFirestore.getInstance()
+                            .collection("Polish").document(mAuth.getCurrentUser().getUid())
+                            .collection("PolishDetail").document(mParamPolish.id)
+                            .update("liked", true).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                }
+                            });
+                } else {
+                    clicked = true;
+                    binding.imageViewFavorite.setImageResource(R.drawable.ic_heart_not_favorite);
+                }
+            }
+        });
+
+
+
+        binding.imageViewFavorite.setOnClickListener(new View.OnClickListener() {
+            Boolean clicked = true;
+            @Override
+            public void onClick(View v) {
+
+                if (clicked) {
+                    clicked = false;
+                    binding.imageViewFavorite.setImageResource(R.drawable.ic_heart_favorite);
+                    FirebaseFirestore.getInstance()
+                            .collection("Polish").document(mAuth.getCurrentUser().getUid())
+                            .collection("PolishDetail").document(mParamPolish.id)
+                            .update("liked", true).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                }
+                            });
+                } else {
+                    clicked = true;
+                    binding.imageViewFavorite.setImageResource(R.drawable.ic_heart_not_favorite);
+                }
+
+            }
+        });
+
+        binding.imageViewDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProgressDialog progressDialog
+                        = new ProgressDialog(getContext());
+                FirebaseFirestore.getInstance()
+                        .collection("Polish").document(mAuth.getCurrentUser().getUid())
+                        .collection("PolishDetail").document(mParamPolish.id)
+                        .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                                progressDialog.dismiss();
+                                Toast
+                                        .makeText(getActivity(),
+                                                "Delete Successful",
+                                                Toast.LENGTH_SHORT)
+                                        .show();
+                                mListener.gotoList();
+
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressDialog.dismiss();
+                                Toast
+                                        .makeText(getActivity(),
+                                                "Fail!!",
+                                                Toast.LENGTH_SHORT)
+                                        .show();
+
+                            }
+                        });
+            }
+        });
+
+
+
+        if (mParamPolish.comment==null){
+            binding.textViewComment.setVisibility(View.INVISIBLE);
+        }
+        else {
+            binding.textViewComment.setVisibility(View.VISIBLE);
+            binding.buttonAddComment.setText("Edit Comment");
+            binding.editTextNote.setHint("Comment");
+        }
+
+
+        binding.buttonAddComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.textViewComment.setVisibility(View.VISIBLE);
+                String note = binding.editTextNote.getText().toString();
+                ProgressDialog progressDialog
+                        = new ProgressDialog(getContext());
+                progressDialog.setTitle("Uploading...");
+                progressDialog.show();
+
+
+                FirebaseFirestore.getInstance()
+                        .collection("Polish").document(mAuth.getCurrentUser().getUid())
+                        .collection("PolishDetail").document(mParamPolish.id)
+                        .update("comment",note).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                                binding.textViewComment.setText(note);
+                                progressDialog.dismiss();
+                                Toast
+                                        .makeText(getActivity(),
+                                                "Comment Uploaded!!",
+                                                Toast.LENGTH_SHORT)
+                                        .show();
+                                binding.editTextNote.setText("");
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Error, Comment not uploaded
+                                progressDialog.dismiss();
+                                Toast
+                                        .makeText(getActivity(),
+                                                "Failed " + e.getMessage(),
+                                                Toast.LENGTH_SHORT)
+                                        .show();
+                            }
+                        });
+
+
+            }
+        });
+
+
+    }
+
+    public abstract class DoubleClickListener implements View.OnClickListener {
+
+        private static final long DOUBLE_CLICK_TIME_DELTA = 300;//milliseconds
+
+        long lastClickTime = 0;
+
+        @Override
+        public void onClick(View v) {
+            long clickTime = System.currentTimeMillis();
+            if (clickTime - lastClickTime < DOUBLE_CLICK_TIME_DELTA){
+                onDoubleClick(v);
+            } else {
+                onSingleClick(v);
+            }
+            lastClickTime = clickTime;
+        }
+
+        public abstract void onSingleClick(View v);
+        public abstract void onDoubleClick(View v);
+    }
+
+
 
 
 

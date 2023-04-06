@@ -12,24 +12,23 @@
         android:id="@+id/textViewPolishName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/baumans"
         android:text="@string/textView"
-        android:textColor="@color/pink"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:textColor="@color/pinkregular"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFavorite" />
 
     <TextView
         android:id="@+id/textViewPolishType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/baumans"
         android:text="@string/textView"
-        android:textColor="@color/pink"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.001"
+        android:textColor="@color/pinkregular"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPolishName" />
 
@@ -37,94 +36,100 @@
         android:id="@+id/textViewDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/baumans"
         android:text="@string/textView"
-        android:textColor="@color/pink"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:textColor="@color/pinkregular"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPolishType" />
 
     <ImageView
         android:id="@+id/imageViewPolish"
+        android:layout_width="248dp"
+        android:layout_height="298dp"
         android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:contentDescription="@string/textView"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/note"
-        android:textColor="@color/pink"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
 
     <EditText
         android:id="@+id/editTextNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="4dp"
         android:ems="10"
         android:hint="@string/comment"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:textColorHint="@color/brightpink"
+        android:textColorHint="@color/pinkrpowder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewComment" />
 
     <Button
         android:id="@+id/buttonAddComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/addComment"
-        android:fontFamily="@font/baumans"
-        android:textAllCaps="false"
+        android:layout_marginEnd="32dp"
         android:backgroundTint="@color/white"
+        android:fontFamily="@font/baumans"
+        android:text="@string/addComment"
+        android:textAllCaps="false"
         android:textColor="@color/pink"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNote" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.641"
+        app:layout_constraintStart_toEndOf="@+id/editTextNote"
+        app:layout_constraintTop_toBottomOf="@+id/textViewComment" />
 
     <ImageView
         android:id="@+id/imageViewFavorite"
-        android:layout_width="41dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="56dp"
+        android:layout_width="32dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="10dp"
         android:contentDescription="@string/heart"
         android:src="@drawable/ic_heart_not_favorite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.68"
-        app:layout_constraintStart_toEndOf="@+id/editTextNote"
+        app:tint="@color/pinkrpowder"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewPolish" />
 
     <TextView
         android:id="@+id/textViewComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/baumans"
         android:text="@string/textView"
-        android:textColor="@color/pink"
+        android:textColor="@color/pinkregular"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
 
     <ImageView
         android:id="@+id/imageViewDelete"
-        android:layout_width="41dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="40dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="10dp"
         android:contentDescription="@string/todo"
-        android:src="@drawable/ic_trashcan"
+        android:src="@drawable/ic_trash3"
         app:layout_constraintStart_toEndOf="@+id/imageViewFavorite"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewPolish"
+        app:tint="@color/pinkrpowder" />
+
+    <ImageView
+        android:id="@+id/imageViewShare"
+        android:layout_width="42dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/ic_share1"
+        app:tint="@color/pinkrpowder"
+        app:layout_constraintStart_toEndOf="@+id/imageViewDelete"
         app:layout_constraintTop_toBottomOf="@+id/imageViewPolish" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

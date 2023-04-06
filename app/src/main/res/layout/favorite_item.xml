@@ -11,10 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="TextView"
-        android:textSize="18sp"
-        android:textColor="@color/pink"
         android:fontFamily="@font/baumans"
+        android:text="TextView"
+        android:textColor="#D81B60"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,9 +25,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="TextView"
-        android:textColor="@color/pink"
         android:fontFamily="@font/baumans"
+        android:text="TextView"
+        android:textColor="#D81B60"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.001"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,9 +38,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="TextView"
-        android:textColor="@color/pink"
         android:fontFamily="@font/baumans"
+        android:text="TextView"
+        android:textColor="#D81B60"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,15 +52,18 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        android:contentDescription="TODO" />
 
-    <ImageView
-        android:id="@+id/imageViewDelete"
-        android:layout_width="44dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="4dp"
+    <Button
+        android:id="@+id/button_remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remove"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDate"
-        app:srcCompat="@drawable/ic_delete" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
