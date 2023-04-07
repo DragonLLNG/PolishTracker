@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
 
 
         //Verify the current user on FirebaseAuth to keep them login
@@ -37,12 +37,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                     .commit();
         }
 
-
-
-
-
-
-
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -52,34 +47,28 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                                 .replace(R.id.containerView, new MenuFragment()).addToBackStack(null)
                                 .commit();
                         break;
+                    case R.id.add:
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.containerView, new AddOnFragment()).addToBackStack(null)
+                                .commit();
+                        break;
                     case R.id.list:
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.containerView, new PolishFragment()).addToBackStack(null)
                                 .commit();
                         break;
                     case R.id.favorite:
-                    default:
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.containerView, new FavoriteFragment()).addToBackStack(null)
                                 .commit();
                         break;
                 }
-
                 return true;
             }
         });
 
 
-
-
-
-
     }
-
-
-
-
-
 
 
 

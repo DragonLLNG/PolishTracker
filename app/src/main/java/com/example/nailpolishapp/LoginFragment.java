@@ -109,7 +109,7 @@ public class LoginFragment extends Fragment {
 
         //Bottom navbar not in login
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setVisibility(View.GONE);
+        bottomNavigationView.setVisibility(View.INVISIBLE);
 
         getActivity().setTitle(R.string.login_label);
 

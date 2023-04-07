@@ -7,17 +7,25 @@
         android:title="List"
         android:icon="@drawable/ic_list3"
         android:visible="true"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
+
     <item
         android:id="@+id/home"
         android:title="Home"
         android:icon="@drawable/ic_home2"
         android:visible="true"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/add"
+        android:icon="@drawable/ic_add512"
+        android:title="Add"
+        android:visible="true"
+        app:showAsAction="ifRoom"/>
+
     <item
         android:id="@+id/favorite"
         android:title="Favorites"
         android:icon="@drawable/ic_heart_favorite"
         android:visible="true"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
 </menu>

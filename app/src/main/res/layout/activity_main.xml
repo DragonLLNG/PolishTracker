@@ -7,6 +7,7 @@
     android:id="@+id/containerView"
     tools:context=".MainActivity">
 
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
@@ -18,6 +19,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav"/>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

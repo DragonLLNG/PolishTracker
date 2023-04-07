@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nailpolishapp.databinding.FragmentFavoriteBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.EventListener;
@@ -43,6 +44,7 @@ public class FavoriteFragment extends Fragment {
     FragmentFavoriteBinding binding;
     ArrayList<Polish> polishArrayList = new ArrayList<>();
     FavoritePolishListAdapter adapter;
+    int heart=0;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -89,6 +91,10 @@ public class FavoriteFragment extends Fragment {
 
         getActivity().setTitle("My Favorite List");
 
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setVisibility(View.VISIBLE);
+
+
         binding.recyclerView.setHasFixedSize(true);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new FavoritePolishListAdapter(polishArrayList);
@@ -107,11 +113,13 @@ public class FavoriteFragment extends Fragment {
                         for (QueryDocumentSnapshot polishDoc : value) {
                             Polish polish = polishDoc.toObject(Polish.class);
                             polishArrayList.add(polish);
+                            //heart =+1;
                             adapter.notifyDataSetChanged();
                             Log.d("test", "onEvent: "+polishArrayList);
                         }
                     }
                 });
+        //bottomNavigationView.getOrCreateBadge(R.id.favorite).setNumber(heart);
     }
 
     //Custom Adapter
