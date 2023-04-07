@@ -129,4 +129,13 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                 .commit();
 
     }
+
+    @Override
+    public void goSearch() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.containerView, new SearchFragment()).addToBackStack(null)
+                .commit();
+    }
+
+
 }

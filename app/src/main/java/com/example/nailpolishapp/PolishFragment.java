@@ -44,9 +44,6 @@ public class PolishFragment extends Fragment {
     PolishListAdapter adapter;
 
 
-
-
-
     public PolishFragment() {
         // Required empty public constructor
     }
@@ -77,7 +74,7 @@ public class PolishFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu:
-                mListener.gotoMenu();
+                mListener.goSearch();
         }
 
         return super.onOptionsItemSelected(item);
@@ -221,7 +218,6 @@ public class PolishFragment extends Fragment {
 
     interface PolishFragmentListener {
         void gotoPolishDetail(Polish polish);
-        void gotoMenu();
-
+        void goSearch();
     }
 }

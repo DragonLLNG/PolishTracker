@@ -85,7 +85,7 @@ public class AddOnFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu:
-                mListener.gotoMenu();
+                mListener.goSearch();
         }
 
         return super.onOptionsItemSelected(item);
@@ -278,6 +278,8 @@ public class AddOnFragment extends Fragment {
 
     interface AddOnListener {
         void gotoList();
+
+        void goSearch();
 
         void gotoMenu();
 

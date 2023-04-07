@@ -73,7 +73,7 @@ public class PolishDetailFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu:
-                mListener.gotoMenu();
+                mListener.goSearch();
         }
 
         return super.onOptionsItemSelected(item);
@@ -323,8 +323,7 @@ public class PolishDetailFragment extends Fragment {
 
     interface DetailListener {
         void gotoList();
-
-        void gotoMenu();
+        void goSearch();
 
     }
 }
