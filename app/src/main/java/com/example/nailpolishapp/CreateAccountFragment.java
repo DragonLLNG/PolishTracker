@@ -1,7 +1,6 @@
 package com.example.nailpolishapp;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,10 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.nailpolishapp.databinding.FragmentCreateAccountBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -55,113 +51,71 @@ public class CreateAccountFragment extends Fragment {
 
 
 
-        binding.buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.login();
-            }
-        });
+        binding.buttonCancel.setOnClickListener(v -> mListener.login());
 
 
         //Registration using email password
-        binding.buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = binding.editTextEmail.getText().toString();
-                String password = binding.editTextPassword.getText().toString();
-                String name = binding.editTextName.getText().toString();
+        binding.buttonRegister.setOnClickListener(v -> {
+            String email = binding.editTextEmail.getText().toString();
+            String password = binding.editTextPassword.getText().toString();
+            String name = binding.editTextName.getText().toString();
 
-                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext());
+            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext());
 
-                if (email.isEmpty()) {
-                    alertBuilder.setTitle(R.string.error)
-                            .setMessage("Email is required")
-                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    Log.d(TAG, "onClick: ");
-                                }
-                            });
-                    alertBuilder.create().show();
-                } else if (password.isEmpty()) {
-                    alertBuilder.setTitle(R.string.error)
-                            .setMessage("Password is at least 8 character")
-                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    Log.d(TAG, "onClick: ");
-                                }
-                            });
-                    alertBuilder.create().show();
-                } else if (name.isEmpty()) {
-                    alertBuilder.setTitle(R.string.error)
-                            .setMessage("Name is required")
-                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    Log.d(TAG, "onClick: ");
-                                }
-                            });
-                    alertBuilder.create().show();
-                } else {
+            if (email.isEmpty()) {
+                alertBuilder.setTitle(R.string.error)
+                        .setMessage("Email is required")
+                        .setPositiveButton(R.string.ok, (dialogInterface, i) -> Log.d(TAG, "onClick: "));
+                alertBuilder.create().show();
+            } else if (password.isEmpty()) {
+                alertBuilder.setTitle(R.string.error)
+                        .setMessage("Password is at least 8 character")
+                        .setPositiveButton(R.string.ok, (dialogInterface, i) -> Log.d(TAG, "onClick: "));
+                alertBuilder.create().show();
+            } else if (name.isEmpty()) {
+                alertBuilder.setTitle(R.string.error)
+                        .setMessage("Name is required")
+                        .setPositiveButton(R.string.ok, (dialogInterface, i) -> Log.d(TAG, "onClick: "));
+                alertBuilder.create().show();
+            } else {
 
-                    mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(name)
-                                        .build();
-                                user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(name)
+                                .build();
+                        user.updateProfile(profileUpdates).addOnCompleteListener(task12 -> {
+                            if (task12.isSuccessful()) {
 
-                                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-                                            HashMap<String, Object> data = new HashMap<>();
-                                            data.put("name", name);
-                                            data.put("uid", mAuth.getCurrentUser().getUid());
-                                            //data.put("isOnline", true);
+                                HashMap<String, Object> data = new HashMap<>();
+                                data.put("name", name);
+                                data.put("uid", mAuth.getCurrentUser().getUid());
+                                //data.put("isOnline", true);
 
-                                            db.collection("users").document(mAuth.getCurrentUser().getUid()).set(data)
-                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            Toast toast = Toast.makeText(getContext(), "Register Successful!", Toast.LENGTH_LONG);
-                                                            toast.show();
-                                                            mListener.gotoMenu();
-                                                        }
-                                                    });
-                                        } else {
-                                            alertBuilder.setTitle(R.string.error)
-                                                    .setMessage("Error in creating user! Try again!")
-                                                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                                            Log.d(TAG, "onClick: ");
-                                                        }
-                                                    });
-                                        }
-                                    }
-                                });
-                            //Handle user invalid inputs
+                                db.collection("users").document(mAuth.getCurrentUser().getUid()).set(data)
+                                        .addOnCompleteListener(task1 -> {
+                                            Toast toast = Toast.makeText(getContext(), "Register Successful!", Toast.LENGTH_LONG);
+                                            toast.show();
+                                            mListener.gotoMenu();
+                                        });
                             } else {
                                 alertBuilder.setTitle(R.string.error)
-                                        .setMessage(task.getException().toString())
-                                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                Log.d(TAG, "onClick: ");
-                                            }
-                                        });
-                                alertBuilder.create().show();
+                                        .setMessage("Error in creating user! Try again!")
+                                        .setPositiveButton(R.string.ok, (dialogInterface, i) -> Log.d(TAG, "onClick: "));
                             }
-                        }
-                    });
+                        });
+                    //Handle user invalid inputs
+                    } else {
+                        alertBuilder.setTitle(R.string.error)
+                                .setMessage(task.getException().toString())
+                                .setPositiveButton(R.string.ok, (dialogInterface, i) -> Log.d(TAG, "onClick: "));
+                        alertBuilder.create().show();
+                    }
+                });
 
-                }
             }
         });
 

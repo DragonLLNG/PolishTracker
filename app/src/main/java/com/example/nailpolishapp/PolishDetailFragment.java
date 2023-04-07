@@ -19,9 +19,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.nailpolishapp.databinding.FragmentPolishDetailBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -149,11 +146,8 @@ public class PolishDetailFragment extends Fragment {
                     FirebaseFirestore.getInstance()
                             .collection("Polish").document(mAuth.getCurrentUser().getUid())
                             .collection("PolishDetail").document(mParamPolish.id)
-                            .update("liked", true).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
+                            .update("liked", true).addOnCompleteListener(task -> {
 
-                                }
                             });
                 } else {
                     clicked = true;
@@ -175,11 +169,8 @@ public class PolishDetailFragment extends Fragment {
                     FirebaseFirestore.getInstance()
                             .collection("Polish").document(mAuth.getCurrentUser().getUid())
                             .collection("PolishDetail").document(mParamPolish.id)
-                            .update("liked", true).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
+                            .update("liked", true).addOnCompleteListener(task -> {
 
-                                }
                             });
                 } else {
                     clicked = true;
@@ -189,42 +180,33 @@ public class PolishDetailFragment extends Fragment {
             }
         });
 
-        binding.imageViewDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProgressDialog progressDialog
-                        = new ProgressDialog(getContext());
-                FirebaseFirestore.getInstance()
-                        .collection("Polish").document(mAuth.getCurrentUser().getUid())
-                        .collection("PolishDetail").document(mParamPolish.id)
-                        .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
+        binding.imageViewDelete.setOnClickListener(v -> {
+            ProgressDialog progressDialog
+                    = new ProgressDialog(getContext());
+            FirebaseFirestore.getInstance()
+                    .collection("Polish").document(mAuth.getCurrentUser().getUid())
+                    .collection("PolishDetail").document(mParamPolish.id)
+                    .delete().addOnCompleteListener(task -> {
 
-                                progressDialog.dismiss();
-                                Toast
-                                        .makeText(getActivity(),
-                                                "Delete Successful",
-                                                Toast.LENGTH_SHORT)
-                                        .show();
-                                mListener.gotoList();
+                        progressDialog.dismiss();
+                        Toast
+                                .makeText(getActivity(),
+                                        "Delete Successful",
+                                        Toast.LENGTH_SHORT)
+                                .show();
+                        mListener.gotoList();
 
 
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                progressDialog.dismiss();
-                                Toast
-                                        .makeText(getActivity(),
-                                                "Fail!!",
-                                                Toast.LENGTH_SHORT)
-                                        .show();
+                    })
+                    .addOnFailureListener(e -> {
+                        progressDialog.dismiss();
+                        Toast
+                                .makeText(getActivity(),
+                                        "Fail!!",
+                                        Toast.LENGTH_SHORT)
+                                .show();
 
-                            }
-                        });
-            }
+                    });
         });
 
 
@@ -239,50 +221,41 @@ public class PolishDetailFragment extends Fragment {
         }
 
 
-        binding.buttonAddComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                binding.textViewComment.setVisibility(View.VISIBLE);
-                String note = binding.editTextNote.getText().toString();
-                ProgressDialog progressDialog
-                        = new ProgressDialog(getContext());
-                progressDialog.setTitle("Uploading...");
-                progressDialog.show();
+        binding.buttonAddComment.setOnClickListener(v -> {
+            binding.textViewComment.setVisibility(View.VISIBLE);
+            String note = binding.editTextNote.getText().toString();
+            ProgressDialog progressDialog
+                    = new ProgressDialog(getContext());
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
 
 
-                FirebaseFirestore.getInstance()
-                        .collection("Polish").document(mAuth.getCurrentUser().getUid())
-                        .collection("PolishDetail").document(mParamPolish.id)
-                        .update("comment",note).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
+            FirebaseFirestore.getInstance()
+                    .collection("Polish").document(mAuth.getCurrentUser().getUid())
+                    .collection("PolishDetail").document(mParamPolish.id)
+                    .update("comment",note).addOnCompleteListener(task -> {
 
-                                binding.textViewComment.setText(note);
-                                progressDialog.dismiss();
-                                Toast
-                                        .makeText(getActivity(),
-                                                "Comment Uploaded!!",
-                                                Toast.LENGTH_SHORT)
-                                        .show();
-                                binding.editTextNote.setText("");
+                        binding.textViewComment.setText(note);
+                        progressDialog.dismiss();
+                        Toast
+                                .makeText(getActivity(),
+                                        "Comment Uploaded!!",
+                                        Toast.LENGTH_SHORT)
+                                .show();
+                        binding.editTextNote.setText("");
 
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // Error, Comment not uploaded
-                                progressDialog.dismiss();
-                                Toast
-                                        .makeText(getActivity(),
-                                                "Failed " + e.getMessage(),
-                                                Toast.LENGTH_SHORT)
-                                        .show();
-                            }
-                        });
+                    })
+                    .addOnFailureListener(e -> {
+                        // Error, Comment not uploaded
+                        progressDialog.dismiss();
+                        Toast
+                                .makeText(getActivity(),
+                                        "Failed " + e.getMessage(),
+                                        Toast.LENGTH_SHORT)
+                                .show();
+                    });
 
 
-            }
         });
 
 

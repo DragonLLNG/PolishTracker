@@ -1,5 +1,6 @@
 package com.example.nailpolishapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,12 +16,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.nailpolishapp.databinding.FragmentMenuBinding;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MenuFragment extends Fragment {
@@ -36,11 +35,11 @@ public class MenuFragment extends Fragment {
         inflater.inflate(R.menu.menu, menu);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu:
-                mListener.goSearch();
+        if (item.getItemId() == R.id.menu) {
+            mListener.goSearch();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -74,50 +73,29 @@ public class MenuFragment extends Fragment {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         DocumentReference docRef = db.collection("users").document(user.getUid());
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                User userDoc = documentSnapshot.toObject(User.class);
-                Log.d("User Test", "onSuccess: " + userDoc.name);
-                binding.textViewUserName.setText("Hi "+ userDoc.name+"!");
-            }
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            User userDoc = documentSnapshot.toObject(User.class);
+            Log.d("User Test", "onSuccess: " + userDoc.name);
+            binding.textViewUserName.setText(String.format("Hi %s!", userDoc.name));
         });
 
 
         //go to PolishFragment
-        binding.buttonList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.gotoList();
-            }
-        });
+        binding.buttonList.setOnClickListener(v -> mListener.gotoList());
 
 
         //go to AddOnFragment
-        binding.buttonAddOn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.gotoAddOn();
-            }
-        });
+        binding.buttonAddOn.setOnClickListener(v -> mListener.gotoAddOn());
 
 
         //go to FavoriteFragment
-        binding.buttonFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.gotoFavorites();
-            }
-        });
+        binding.buttonFavorite.setOnClickListener(v -> mListener.gotoFavorites());
 
         //log out
-        binding.buttonLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                mListener.login();
+        binding.buttonLogout.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            mListener.login();
 
-            }
         });
 
     }
@@ -129,8 +107,7 @@ public class MenuFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        mListener = (MenuListener) context; {
-        };
+        mListener = (MenuListener) context;
     }
 
     interface MenuListener{

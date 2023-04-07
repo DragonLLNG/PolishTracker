@@ -23,16 +23,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nailpolishapp.databinding.FragmentFavoriteBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -69,9 +64,8 @@ public class FavoriteFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu:
-                mListener.goSearch();;
+        if (item.getItemId() == R.id.menu) {
+            mListener.goSearch();
         }
 
         return super.onOptionsItemSelected(item);
@@ -106,17 +100,14 @@ public class FavoriteFragment extends Fragment {
         db.collection("Polish").document(user.getUid()).collection("PolishDetail")
                 .whereEqualTo("liked", true)
                 //.orderBy("createdAt", Query.Direction.ASCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        polishArrayList.clear();
-                        for (QueryDocumentSnapshot polishDoc : value) {
-                            Polish polish = polishDoc.toObject(Polish.class);
-                            polishArrayList.add(polish);
-                            //heart =+1;
-                            adapter.notifyDataSetChanged();
-                            Log.d("test", "onEvent: "+polishArrayList);
-                        }
+                .addSnapshotListener((value, error) -> {
+                    polishArrayList.clear();
+                    for (QueryDocumentSnapshot polishDoc : value) {
+                        Polish polish = polishDoc.toObject(Polish.class);
+                        polishArrayList.add(polish);
+                        //heart =+1;
+                        adapter.notifyDataSetChanged();
+                        Log.d("test", "onEvent: "+polishArrayList);
                     }
                 });
         //bottomNavigationView.getOrCreateBadge(R.id.favorite).setNumber(heart);
@@ -134,9 +125,8 @@ public class FavoriteFragment extends Fragment {
         @Override
         public FavoritePolishListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.favorite_item, parent, false);
-            FavoritePolishListViewHolder favoritePolishListViewHolder = new FavoritePolishListViewHolder(view);
 
-            return favoritePolishListViewHolder;
+            return new FavoritePolishListViewHolder(view);
         }
 
 
@@ -195,22 +185,10 @@ public class FavoriteFragment extends Fragment {
                 remove = itemView.findViewById(R.id.button_remove);
 
 
-                remove.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        FirebaseFirestore.getInstance()
-                                .collection("Polish").document(user.getUid())
-                                .collection("PolishDetail").document(polish.id)
-                                .update("liked", false).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        adapter.notifyDataSetChanged();
-
-                                    }
-                                });
-
-                    }
-                });
+                remove.setOnClickListener(v -> FirebaseFirestore.getInstance()
+                        .collection("Polish").document(user.getUid())
+                        .collection("PolishDetail").document(polish.id)
+                        .update("liked", false).addOnCompleteListener(task -> adapter.notifyDataSetChanged()));
 
             }
         }

@@ -25,12 +25,9 @@ import com.example.nailpolishapp.databinding.FragmentPolishBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -72,9 +69,8 @@ public class PolishFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu:
-                mListener.goSearch();
+        if (item.getItemId() == R.id.menu) {
+            mListener.goSearch();
         }
 
         return super.onOptionsItemSelected(item);
@@ -105,16 +101,13 @@ public class PolishFragment extends Fragment {
 
         db.collection("Polish").document(user.getUid()).collection("PolishDetail")
                 .orderBy("createdAt", Query.Direction.ASCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        polishArrayList.clear();
-                        for (QueryDocumentSnapshot polishDoc : value) {
-                            Polish polish = polishDoc.toObject(Polish.class);
-                            polishArrayList.add(polish);
-                            adapter.notifyDataSetChanged();
-                            Log.d("test", "onEvent: "+polishArrayList);
-                        }
+                .addSnapshotListener((value, error) -> {
+                    polishArrayList.clear();
+                    for (QueryDocumentSnapshot polishDoc : value) {
+                        Polish polish = polishDoc.toObject(Polish.class);
+                        polishArrayList.add(polish);
+                        adapter.notifyDataSetChanged();
+                        Log.d("test", "onEvent: "+polishArrayList);
                     }
                 });
     }
@@ -188,13 +181,7 @@ public class PolishFragment extends Fragment {
                 polishImage = itemView.findViewById(R.id.imageViewPolish);
 
                 //Display polish data in different fragment
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mListener.gotoPolishDetail(polish);
-
-                    }
-                });
+                itemView.setOnClickListener(v -> mListener.gotoPolishDetail(polish));
             }
         }
 
