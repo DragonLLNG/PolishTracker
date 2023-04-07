@@ -19,21 +19,29 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
 
         //Verify the current user on FirebaseAuth to keep them login
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_main);
         if (mAuth.getCurrentUser() == null) {
+
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.containerView, new LoginFragment())
                     .commit();
+
         } else {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.containerView, new MenuFragment())
                     .commit();
         }
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+
+
+
+
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -60,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                 return true;
             }
         });
+
+
 
 
 

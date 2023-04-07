@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.example.nailpolishapp.databinding.FragmentCreateAccountBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -164,6 +165,10 @@ public class CreateAccountFragment extends Fragment {
                 }
             }
         });
+
+        //Bottom navbar not in create account
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setVisibility(View.GONE);
 
         getActivity().setTitle("Sign Up");
     }

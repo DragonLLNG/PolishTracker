@@ -96,6 +96,7 @@ public class FavoriteFragment extends Fragment {
 
 
 
+
         db.collection("Polish").document(user.getUid()).collection("PolishDetail")
                 .whereEqualTo("liked", true)
                 //.orderBy("createdAt", Query.Direction.ASCENDING)
@@ -129,6 +130,8 @@ public class FavoriteFragment extends Fragment {
 
             return favoritePolishListViewHolder;
         }
+
+
 
         @Override
         public void onBindViewHolder(@NonNull FavoritePolishListViewHolder holder, int position) {

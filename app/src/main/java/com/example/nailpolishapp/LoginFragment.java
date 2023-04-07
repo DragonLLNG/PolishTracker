@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.example.nailpolishapp.databinding.FragmentLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -105,6 +106,10 @@ public class LoginFragment extends Fragment {
                 mListener.createNewAccount();
             }
         });
+
+        //Bottom navbar not in login
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setVisibility(View.GONE);
 
         getActivity().setTitle(R.string.login_label);
 
