@@ -107,7 +107,10 @@ public class LoginFragment extends Fragment {
         });
 
         getActivity().setTitle(R.string.login_label);
+
     }
+
+
 
     public LoginListener mListener;
 
@@ -116,6 +119,9 @@ public class LoginFragment extends Fragment {
         super.onAttach(context);
         mListener = (LoginListener) context;
     }
+
+
+
 
     public interface LoginListener {
         void createNewAccount();

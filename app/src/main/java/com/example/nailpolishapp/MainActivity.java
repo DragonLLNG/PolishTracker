@@ -5,26 +5,22 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-
 
 
 public class MainActivity extends AppCompatActivity implements LoginFragment.LoginListener, CreateAccountFragment.CreateAccountListener, MenuFragment.MenuListener,
         AddOnFragment.AddOnListener, PolishFragment.PolishFragmentListener, PolishDetailFragment.DetailListener, FavoriteFragment.FavoriteListListener {
 
-    BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-            //Verify the current user on FirebaseAuth to keep them login
+        //Verify the current user on FirebaseAuth to keep them login
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_main);
         if (mAuth.getCurrentUser() == null) {
@@ -37,7 +33,43 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                     .commit();
         }
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.containerView, new MenuFragment()).addToBackStack(null)
+                                .commit();
+                        break;
+                    case R.id.list:
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.containerView, new PolishFragment()).addToBackStack(null)
+                                .commit();
+                        break;
+                    case R.id.favorite:
+                    default:
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.containerView, new FavoriteFragment()).addToBackStack(null)
+                                .commit();
+                        break;
+                }
+
+                return true;
+            }
+        });
+
+
+
+
     }
+
+
+
+
+
 
 
 
