@@ -41,6 +41,8 @@ public class PolishFragment extends Fragment {
     PolishListAdapter adapter;
 
 
+
+
     public PolishFragment() {
         // Required empty public constructor
     }

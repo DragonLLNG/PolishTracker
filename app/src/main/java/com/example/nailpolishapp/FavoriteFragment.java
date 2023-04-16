@@ -71,7 +71,7 @@ public class FavoriteFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu:
-                mListener.gotoMenu();
+                mListener.goSearch();
         }
 
         return super.onOptionsItemSelected(item);
@@ -103,9 +103,6 @@ public class FavoriteFragment extends Fragment {
 
         binding.recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
-
-
-
 
 
         db.collection("Polish").document(user.getUid()).collection("PolishDetail")
@@ -224,6 +221,7 @@ public class FavoriteFragment extends Fragment {
 
     interface FavoriteListListener {
         void gotoMenu();
+        void goSearch();
 
     }
 }
