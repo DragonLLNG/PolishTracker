@@ -19,6 +19,8 @@ public class MainActivity_Slash extends AppCompatActivity {
 
         setContentView(R.layout.activity_main_slash);
 
+        getSupportActionBar().hide();
+
         // on below line we are calling handler to run a task
         // for specific time interval
         new Handler().postDelayed(new Runnable() {

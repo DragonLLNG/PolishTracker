@@ -24,6 +24,15 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
+        getSupportActionBar().hide();
+
+//        View decorView = getWindow().getDecorView();
+//        // Hide both the navigation bar and the status bar.
+//        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+//                | View.SYSTEM_UI_FLAG_FULLSCREEN;
+//
+//        decorView.setSystemUiVisibility(uiOptions);
+
     }
 
 
