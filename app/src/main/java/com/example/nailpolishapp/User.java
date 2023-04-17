@@ -1,17 +1,18 @@
 package com.example.nailpolishapp;
 
 public class User {
-    String uid, name;
+    String uid, name, profileImageURL;
 
     public User() {
     }
 
-    public User(String uid, String name) {
+    public User(String uid, String name, String profileImageURL) {
         this.uid = uid;
         this.name = name;
+        this.profileImageURL = profileImageURL;
+
 
     }
-
 
     public String getUid() {
         return uid;
@@ -29,4 +30,11 @@ public class User {
         this.name = name;
     }
 
+    public String getProfileImageURL() {
+        return profileImageURL;
+    }
+
+    public void setProfileImageURL(String profileImageURL) {
+        this.profileImageURL = profileImageURL;
+    }
 }

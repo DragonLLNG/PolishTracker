@@ -213,8 +213,6 @@ public class AddOnFragment extends Fragment {
                 polish.imageURL = imageEncoded;
                 binding.textViewUploadImage.setVisibility(View.INVISIBLE);
 
-                
-
 
             }
         }
