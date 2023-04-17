@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity_Slash"
-    android:background="@drawable/gradient">
+   >
 
     <!--on below line we are adding an image view-->
     <ImageView
@@ -24,6 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/idIVLogo"
         android:layout_centerInParent="true"
-        android:indeterminateTint="@color/white" />
+        android:indeterminateTint="@color/pink" />
 
 </RelativeLayout>
