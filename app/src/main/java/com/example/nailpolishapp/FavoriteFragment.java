@@ -3,8 +3,11 @@ package com.example.nailpolishapp;
 import static com.example.nailpolishapp.PolishFragment.decodeFromFirebaseBase64;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,6 +40,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class FavoriteFragment extends Fragment {
@@ -168,6 +172,7 @@ public class FavoriteFragment extends Fragment {
 
 
 
+
         }
 
         @Override
@@ -177,7 +182,7 @@ public class FavoriteFragment extends Fragment {
 
         public class FavoritePolishListViewHolder extends RecyclerView.ViewHolder{
             TextView polishName;
-            ImageView polishImage, remove;
+            ImageView polishImage, remove, share;
             Polish polish;
 
 
@@ -186,6 +191,7 @@ public class FavoriteFragment extends Fragment {
                 polishName = itemView.findViewById(R.id.textViewPolishName);
                 polishImage = itemView.findViewById(R.id.imageViewPolish);
                 remove = itemView.findViewById(R.id.imageViewDelete);
+                share = itemView.findViewById(R.id.imageViewShare);
 
                 remove.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -201,6 +207,31 @@ public class FavoriteFragment extends Fragment {
                                     }
                                 });
 
+                    }
+                });
+
+                share.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Handle share action
+                        Random rand = new Random();
+                        int randNo = rand.nextInt(100000);
+                        String imgBitmapPath = null;
+                        try {
+                            imgBitmapPath = MediaStore.Images.Media.insertImage(getContext().getContentResolver(),
+                                    decodeFromFirebaseBase64(polish.imageURL), "IMG:" + randNo, null);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Uri imgBitmapUri = Uri.parse(imgBitmapPath);
+
+                        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                        shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        shareIntent.putExtra(Intent.EXTRA_STREAM, imgBitmapUri);
+                        shareIntent.setType("image/png");
+                        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, polish.name);
+                        startActivity(Intent.createChooser(shareIntent, "Share with"));
                     }
                 });
 
