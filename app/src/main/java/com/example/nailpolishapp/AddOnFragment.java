@@ -76,13 +76,14 @@ public class AddOnFragment extends Fragment {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
+                Log.d(TAG, "onQueryTextSubmit: "+query);
 
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
+                Log.d(TAG, "onQueryTextSubmit: "+newText);
                 return true;
             } });
 
