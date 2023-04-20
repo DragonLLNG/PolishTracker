@@ -46,6 +46,7 @@
     <string name="main_menu">Main menu</string>
     <string name="todofix">TODO</string>
     <string name="remove">Remove</string>
+    <string name="search_hint">color</string>
 
 
 </resources>
