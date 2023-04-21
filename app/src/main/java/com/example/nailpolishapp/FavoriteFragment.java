@@ -122,9 +122,10 @@ public class FavoriteFragment extends Fragment {
                             adapter.notifyDataSetChanged();
                             Log.d("test", "onEvent: "+polishArrayList);
                         }
+                        bottomNavigationView.getOrCreateBadge(R.id.favorite).setNumber(polishArrayList.size());
                     }
                 });
-        //bottomNavigationView.getOrCreateBadge(R.id.favorite).setNumber(heart);
+
     }
 
 
