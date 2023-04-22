@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -66,16 +67,23 @@ public class PolishFragment extends Fragment {
 
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu, menu);
-    }
+        SearchView searchView = (SearchView) menu.findItem(R.id.menu).getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        if (item.getItemId() == R.id.menu) {
-//            mListener.goSearch();
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d("Favorite", "onQueryTextSubmit: "+query);
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d("Favorite", "onQueryTextSubmit: "+newText);
+                return true;
+            } });
+
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
