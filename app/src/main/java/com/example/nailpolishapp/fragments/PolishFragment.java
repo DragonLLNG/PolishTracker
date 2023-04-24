@@ -1,4 +1,4 @@
-package com.example.nailpolishapp;
+package com.example.nailpolishapp.fragments;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -21,6 +21,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nailpolishapp.models.Polish;
+import com.example.nailpolishapp.R;
 import com.example.nailpolishapp.databinding.FragmentPolishBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -149,9 +151,9 @@ public class PolishFragment extends Fragment {
             holder.polishType.setText(polish.getType().toString());
             holder.date.setText(polish.getCreatedAt().toString());
             holder.polishImage.setImageBitmap(selectedImageBitmap);
-            if (polish.imageURL!=null && !polish.imageURL.contains("http")) {
+            if (polish.getImageURL() !=null && !polish.getImageURL().contains("http")) {
                 try {
-                    Bitmap imageBitmap = decodeFromFirebaseBase64(polish.imageURL);
+                    Bitmap imageBitmap = decodeFromFirebaseBase64(polish.getImageURL());
                     Bitmap resizedBitmap = Bitmap.createScaledBitmap(
                             imageBitmap, 200, 200, false);
 
@@ -162,7 +164,7 @@ public class PolishFragment extends Fragment {
             } else {
 
                 Picasso.get()
-                        .load(polish.imageURL)
+                        .load(polish.getImageURL())
 //                    .resize(MAX_WIDTH, MAX_HEIGHT)
 //                        .centerCrop()
                         .into(holder.polishImage);
@@ -212,7 +214,7 @@ public class PolishFragment extends Fragment {
         mListener = (PolishFragmentListener) context;
     }
 
-    interface PolishFragmentListener {
+    public interface PolishFragmentListener {
         void gotoPolishDetail(Polish polish);
         void goSearch();
     }

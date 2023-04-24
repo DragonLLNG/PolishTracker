@@ -1,6 +1,6 @@
-package com.example.nailpolishapp;
+package com.example.nailpolishapp.fragments;
 
-import static com.example.nailpolishapp.PolishFragment.decodeFromFirebaseBase64;
+import static com.example.nailpolishapp.fragments.PolishFragment.decodeFromFirebaseBase64;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +25,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nailpolishapp.models.Polish;
+import com.example.nailpolishapp.R;
 import com.example.nailpolishapp.databinding.FragmentFavoriteBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -175,9 +177,9 @@ public class FavoriteFragment extends Fragment {
             holder.polish = polish;
             holder.polishName.setText(polish.getName());
 
-            if (polish.imageURL!=null && !polish.imageURL.contains("http")) {
+            if (polish.getImageURL() !=null && !polish.getImageURL().contains("http")) {
                 try {
-                    Bitmap imageBitmap = decodeFromFirebaseBase64(polish.imageURL);
+                    Bitmap imageBitmap = decodeFromFirebaseBase64(polish.getImageURL());
                     Bitmap resizedBitmap = Bitmap.createScaledBitmap(
                             imageBitmap, 200, 200, false);
 
@@ -188,7 +190,7 @@ public class FavoriteFragment extends Fragment {
             } else {
 
                 Picasso.get()
-                        .load(polish.imageURL)
+                        .load(polish.getImageURL())
                         .into(holder.polishImage);
             }
 
@@ -220,7 +222,7 @@ public class FavoriteFragment extends Fragment {
                     public void onClick(View v) {
                         FirebaseFirestore.getInstance()
                                 .collection("Polish").document(user.getUid())
-                                .collection("PolishDetail").document(polish.id)
+                                .collection("PolishDetail").document(polish.getId())
                                 .update("liked", false).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -241,7 +243,7 @@ public class FavoriteFragment extends Fragment {
                         String imgBitmapPath = null;
                         try {
                             imgBitmapPath = MediaStore.Images.Media.insertImage(getContext().getContentResolver(),
-                                    decodeFromFirebaseBase64(polish.imageURL), "IMG:" + randNo, null);
+                                    decodeFromFirebaseBase64(polish.getImageURL()), "IMG:" + randNo, null);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -252,7 +254,7 @@ public class FavoriteFragment extends Fragment {
                         shareIntent.putExtra(Intent.EXTRA_STREAM, imgBitmapUri);
                         shareIntent.setType("image/png");
                         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                        shareIntent.putExtra(Intent.EXTRA_TEXT, polish.name);
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, polish.getName());
                         startActivity(Intent.createChooser(shareIntent, "Share with"));
                     }
                 });
@@ -272,7 +274,7 @@ public class FavoriteFragment extends Fragment {
         mListener = (FavoriteListListener) context;
     }
 
-    interface FavoriteListListener {
+    public interface FavoriteListListener {
         void gotoMenu();
         void goSearch();
 

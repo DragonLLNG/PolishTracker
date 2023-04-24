@@ -1,4 +1,4 @@
-package com.example.nailpolishapp;
+package com.example.nailpolishapp.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.example.nailpolishapp.R;
 import com.example.nailpolishapp.databinding.FragmentCreateAccountBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -134,7 +135,7 @@ public class CreateAccountFragment extends Fragment {
         mListener = (CreateAccountListener) context;
     }
 
-    interface CreateAccountListener {
+    public interface CreateAccountListener {
         void login();
         void gotoMenu();
     }

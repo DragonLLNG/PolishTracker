@@ -1,4 +1,4 @@
-package com.example.nailpolishapp;
+package com.example.nailpolishapp.models;
 
 public class User {
     String uid, name, profileImageURL;

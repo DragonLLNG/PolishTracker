@@ -1,4 +1,4 @@
-package com.example.nailpolishapp;
+package com.example.nailpolishapp.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

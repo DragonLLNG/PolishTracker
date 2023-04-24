@@ -1,4 +1,4 @@
-package com.example.nailpolishapp;
+package com.example.nailpolishapp.fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,6 +21,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.example.nailpolishapp.models.Polish;
+import com.example.nailpolishapp.R;
 import com.example.nailpolishapp.databinding.FragmentAddOnBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -176,7 +178,7 @@ public class AddOnFragment extends Fragment {
                                     Toast.makeText(getActivity(), "Error creating a Polish instance", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                            Log.d("Polish", "onComplete: " + polish.name);
+                            Log.d("Polish", "onComplete: " + polish.getName());
                         } else {
                             Toast.makeText(getActivity(), "Error creating a Polish instance", Toast.LENGTH_SHORT).show();
                         }
@@ -223,7 +225,7 @@ public class AddOnFragment extends Fragment {
                 selectedImageBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
                 String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
 
-                polish.imageURL = imageEncoded;
+                polish.setImageURL(imageEncoded);
                 binding.textViewUploadImage.setVisibility(View.INVISIBLE);
 
 
@@ -239,7 +241,7 @@ public class AddOnFragment extends Fragment {
         mListener = (AddOnListener) context;
     }
 
-    interface AddOnListener {
+    public interface AddOnListener {
         void gotoList();
 
         void goSearch();

@@ -1,4 +1,4 @@
-package com.example.nailpolishapp;
+package com.example.nailpolishapp.activities;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -6,6 +6,16 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.nailpolishapp.models.Polish;
+import com.example.nailpolishapp.R;
+import com.example.nailpolishapp.fragments.AddOnFragment;
+import com.example.nailpolishapp.fragments.CreateAccountFragment;
+import com.example.nailpolishapp.fragments.FavoriteFragment;
+import com.example.nailpolishapp.fragments.LoginFragment;
+import com.example.nailpolishapp.fragments.MenuFragment;
+import com.example.nailpolishapp.fragments.PolishDetailFragment;
+import com.example.nailpolishapp.fragments.PolishFragment;
+import com.example.nailpolishapp.fragments.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;

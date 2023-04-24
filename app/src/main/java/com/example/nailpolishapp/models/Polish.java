@@ -1,9 +1,4 @@
-package com.example.nailpolishapp;
-
-import android.net.Uri;
-
-import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.FieldValue;
+package com.example.nailpolishapp.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;

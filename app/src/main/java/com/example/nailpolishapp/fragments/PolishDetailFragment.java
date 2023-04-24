@@ -1,6 +1,6 @@
-package com.example.nailpolishapp;
+package com.example.nailpolishapp.fragments;
 
-import static com.example.nailpolishapp.PolishFragment.decodeFromFirebaseBase64;
+import static com.example.nailpolishapp.fragments.PolishFragment.decodeFromFirebaseBase64;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -20,6 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.nailpolishapp.models.Polish;
+import com.example.nailpolishapp.R;
 import com.example.nailpolishapp.databinding.FragmentPolishDetailBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -98,7 +100,7 @@ public class PolishDetailFragment extends Fragment {
         binding.textViewPolishName.setText(mParamPolish.getName());
         binding.textViewPolishType.setText(mParamPolish.getType().toString());
         binding.textViewDate.setText(mParamPolish.getCreatedAt().toString());
-        if(mParamPolish.comment!=null) {
+        if(mParamPolish.getComment() !=null) {
             binding.textViewComment.setText(mParamPolish.getComment());
         }
         else{
@@ -106,9 +108,9 @@ public class PolishDetailFragment extends Fragment {
         }
 
 
-        if (mParamPolish.imageURL!=null && !mParamPolish.imageURL.contains("http")) {
+        if (mParamPolish.getImageURL() !=null && !mParamPolish.getImageURL().contains("http")) {
             try {
-                Bitmap imageBitmap = decodeFromFirebaseBase64(mParamPolish.imageURL);
+                Bitmap imageBitmap = decodeFromFirebaseBase64(mParamPolish.getImageURL());
                 Bitmap resizedBitmap = Bitmap.createScaledBitmap(
                         imageBitmap, 200, 200, false);
 
@@ -119,13 +121,13 @@ public class PolishDetailFragment extends Fragment {
         } else {
 
             Picasso.get()
-                    .load(mParamPolish.imageURL)
+                    .load(mParamPolish.getImageURL())
 //                    .resize(MAX_WIDTH, MAX_HEIGHT)
 //                        .centerCrop()
                     .into(binding.imageViewPolish);
         }
 
-        if (mParamPolish.liked==true){
+        if (mParamPolish.isLiked() ==true){
             binding.imageViewFavorite.setImageResource(R.drawable.ic_heart_favorite);
         }
         else {
@@ -148,7 +150,7 @@ public class PolishDetailFragment extends Fragment {
                     binding.imageViewFavorite.setImageResource(R.drawable.ic_heart_favorite);
                     FirebaseFirestore.getInstance()
                             .collection("Polish").document(mAuth.getCurrentUser().getUid())
-                            .collection("PolishDetail").document(mParamPolish.id)
+                            .collection("PolishDetail").document(mParamPolish.getId())
                             .update("liked", true).addOnCompleteListener(task -> {
 
                             });
@@ -171,7 +173,7 @@ public class PolishDetailFragment extends Fragment {
                     binding.imageViewFavorite.setImageResource(R.drawable.ic_heart_favorite);
                     FirebaseFirestore.getInstance()
                             .collection("Polish").document(mAuth.getCurrentUser().getUid())
-                            .collection("PolishDetail").document(mParamPolish.id)
+                            .collection("PolishDetail").document(mParamPolish.getId())
                             .update("liked", true).addOnCompleteListener(task -> {
 
                             });
@@ -188,7 +190,7 @@ public class PolishDetailFragment extends Fragment {
                     = new ProgressDialog(getContext());
             FirebaseFirestore.getInstance()
                     .collection("Polish").document(mAuth.getCurrentUser().getUid())
-                    .collection("PolishDetail").document(mParamPolish.id)
+                    .collection("PolishDetail").document(mParamPolish.getId())
                     .delete().addOnCompleteListener(task -> {
 
                         progressDialog.dismiss();
@@ -213,7 +215,7 @@ public class PolishDetailFragment extends Fragment {
         });
 
 
-        if (mParamPolish.comment==null){
+        if (mParamPolish.getComment() ==null){
             binding.textViewComment.setVisibility(View.INVISIBLE);
         }
         else {
@@ -234,7 +236,7 @@ public class PolishDetailFragment extends Fragment {
 
             FirebaseFirestore.getInstance()
                     .collection("Polish").document(mAuth.getCurrentUser().getUid())
-                    .collection("PolishDetail").document(mParamPolish.id)
+                    .collection("PolishDetail").document(mParamPolish.getId())
                     .update("comment",note).addOnCompleteListener(task -> {
 
                         binding.textViewComment.setText(note);
@@ -272,7 +274,7 @@ public class PolishDetailFragment extends Fragment {
                 String imgBitmapPath = null;
                 try {
                     imgBitmapPath = MediaStore.Images.Media.insertImage(getContext().getContentResolver(),
-                            decodeFromFirebaseBase64(mParamPolish.imageURL), "IMG:" + randNo, null);
+                            decodeFromFirebaseBase64(mParamPolish.getImageURL()), "IMG:" + randNo, null);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -283,7 +285,7 @@ public class PolishDetailFragment extends Fragment {
                 shareIntent.putExtra(Intent.EXTRA_STREAM, imgBitmapUri);
                 shareIntent.setType("image/png");
                 shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, mParamPolish.name);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, mParamPolish.getName());
                 startActivity(Intent.createChooser(shareIntent, "Share with"));
 
 
@@ -328,7 +330,7 @@ public class PolishDetailFragment extends Fragment {
         mListener = (DetailListener) context;
     }
 
-    interface DetailListener {
+    public interface DetailListener {
         void gotoList();
         void goSearch();
 

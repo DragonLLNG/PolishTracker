@@ -1,6 +1,6 @@
-package com.example.nailpolishapp;
+package com.example.nailpolishapp.fragments;
 
-import static com.example.nailpolishapp.PolishFragment.decodeFromFirebaseBase64;
+import static com.example.nailpolishapp.fragments.PolishFragment.decodeFromFirebaseBase64;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -26,6 +26,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.nailpolishapp.R;
+import com.example.nailpolishapp.models.User;
 import com.example.nailpolishapp.databinding.FragmentMenuBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -98,10 +100,10 @@ public class MenuFragment extends Fragment {
 
         docRef.get().addOnSuccessListener(documentSnapshot -> {
             User userDoc = documentSnapshot.toObject(User.class);
-            Log.d("User Test", "onSuccess: " + userDoc.name);
-            binding.textViewUserName.setText(String.format("Hi %s!", userDoc.name));
+            Log.d("User Test", "onSuccess: " + userDoc.getName());
+            binding.textViewUserName.setText(String.format("Hi %s!", userDoc.getName()));
 
-            if (userDoc.profileImageURL==null){
+            if (userDoc.getProfileImageURL() ==null){
                 //Profile handling
                 binding.imageViewProfile.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -118,9 +120,9 @@ public class MenuFragment extends Fragment {
             }
             else{
 
-                if (userDoc.profileImageURL!=null && !userDoc.profileImageURL.contains("http")) {
+                if (userDoc.getProfileImageURL() !=null && !userDoc.getProfileImageURL().contains("http")) {
                     try {
-                        Bitmap imageBitmap = decodeFromFirebaseBase64(userDoc.profileImageURL);
+                        Bitmap imageBitmap = decodeFromFirebaseBase64(userDoc.getProfileImageURL());
                         Bitmap resizedBitmap = Bitmap.createScaledBitmap(
                                 imageBitmap, 200, 200, false);
 
@@ -131,7 +133,7 @@ public class MenuFragment extends Fragment {
                 } else {
 
                     Picasso.get()
-                            .load(userDoc.profileImageURL)
+                            .load(userDoc.getProfileImageURL())
 //                    .resize(MAX_WIDTH, MAX_HEIGHT)
 //                        .centerCrop()
                             .into(binding.imageViewProfile);
@@ -235,7 +237,7 @@ public class MenuFragment extends Fragment {
         mListener = (MenuListener) context;
     }
 
-    interface MenuListener{
+    public interface MenuListener{
         void gotoList();
         void gotoAddOn();
         void gotoFavorites();
