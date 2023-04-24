@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         //Verify the current user on FirebaseAuth to keep them login
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_main);
@@ -82,10 +81,6 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                 return true;
             }
         });
-
-        showHeart(bottomNavigationView);
-
-
 
 
 

@@ -21,9 +21,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import com.example.nailpolishapp.models.Polish;
 import com.example.nailpolishapp.R;
 import com.example.nailpolishapp.databinding.FragmentAddOnBinding;
+import com.example.nailpolishapp.models.Polish;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -67,24 +67,10 @@ public class AddOnFragment extends Fragment {
         binding = FragmentAddOnBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
-
+//
 //    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 //        inflater.inflate(R.menu.menu, menu);
-//        SearchView searchView = (SearchView) menu.findItem(R.id.menu).getActionView();
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                Log.d(TAG, "onQueryTextSubmit: "+query);
-//
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                Log.d(TAG, "onQueryTextSubmit: "+newText);
-//                return true;
-//            } });
+//        mListener.goSearch();
 //
 //    }
 

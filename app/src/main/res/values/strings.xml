@@ -3,6 +3,7 @@
     <string name="logout_title">Logout</string>
     <string name="my_favorites_title">My Favorites</string>
 
+    <string name="videoView">videoView</string>
     <string name="email_label">Email</string>
     <string name="password_label">Password</string>
     <string name="login_label">Log In</string>

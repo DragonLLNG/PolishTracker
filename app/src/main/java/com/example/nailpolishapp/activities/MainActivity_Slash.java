@@ -11,6 +11,8 @@ import com.example.nailpolishapp.R;
 
 public class MainActivity_Slash extends AppCompatActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,16 +30,10 @@ public class MainActivity_Slash extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // on below line we are
                 // creating a new intent
                 Intent i = new Intent(MainActivity_Slash.this, WelcomeActivity.class);
-
-                // on below line we are
                 // starting a new activity.
                 startActivity(i);
-
-                // on the below line we are finishing
-                // our current activity.
                 finish();
             }
         }, 2000);
