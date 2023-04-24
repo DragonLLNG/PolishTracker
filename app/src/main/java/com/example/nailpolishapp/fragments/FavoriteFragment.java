@@ -142,11 +142,9 @@ public class FavoriteFragment extends Fragment {
                         for (QueryDocumentSnapshot polishDoc : value) {
                             Polish polish = polishDoc.toObject(Polish.class);
                             polishArrayList.add(polish);
-                            //heart =+1;
                             adapter.notifyDataSetChanged();
                             Log.d("test", "onEvent: "+polishArrayList);
                         }
-                        bottomNavigationView.getOrCreateBadge(R.id.favorite).setNumber(polishArrayList.size());
                     }
                 });
 

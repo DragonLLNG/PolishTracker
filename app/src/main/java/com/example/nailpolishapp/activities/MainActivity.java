@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.nailpolishapp.models.Polish;
 import com.example.nailpolishapp.R;
 import com.example.nailpolishapp.fragments.AddOnFragment;
 import com.example.nailpolishapp.fragments.CreateAccountFragment;
@@ -16,20 +15,27 @@ import com.example.nailpolishapp.fragments.MenuFragment;
 import com.example.nailpolishapp.fragments.PolishDetailFragment;
 import com.example.nailpolishapp.fragments.PolishFragment;
 import com.example.nailpolishapp.fragments.SearchFragment;
+import com.example.nailpolishapp.models.Polish;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 
 public class MainActivity extends AppCompatActivity implements LoginFragment.LoginListener, CreateAccountFragment.CreateAccountListener, MenuFragment.MenuListener,
         AddOnFragment.AddOnListener, PolishFragment.PolishFragmentListener, PolishDetailFragment.DetailListener, FavoriteFragment.FavoriteListListener {
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
 
         //Verify the current user on FirebaseAuth to keep them login
@@ -77,8 +83,17 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
             }
         });
 
+        showHeart(bottomNavigationView);
+
+
+
+
+
+
+
 
     }
+
 
 
 
@@ -147,6 +162,22 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                 .replace(R.id.containerView, new SearchFragment()).addToBackStack(null)
                 .commit();
     }
+
+    public void showHeart(BottomNavigationView bottomNavigationView){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db.collection("Polish").document(user.getUid()).collection("PolishDetail")
+                .whereEqualTo("liked", true)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        bottomNavigationView.getOrCreateBadge(R.id.favorite).setNumber(task.getResult().size());
+                    }
+                });
+    }
+
+
+
 
 
 }

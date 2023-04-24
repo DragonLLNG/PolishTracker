@@ -90,4 +90,5 @@ public class Polish implements Serializable{
     public void setLiked(boolean liked) {
         this.liked = liked;
     }
+
 }
