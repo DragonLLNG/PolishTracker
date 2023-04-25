@@ -32,15 +32,18 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //Verify the current user on FirebaseAuth to keep them login
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
         setContentView(R.layout.activity_main);
-        if (mAuth.getCurrentUser() == null) {
+        if (user == null) {
 
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.containerView, new LoginFragment())
@@ -50,39 +53,39 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.containerView, new MenuFragment())
                     .commit();
-        }
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.home:
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.containerView, new MenuFragment()).addToBackStack(null)
-                                .commit();
-                        break;
-                    case R.id.add:
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.containerView, new AddOnFragment()).addToBackStack(null)
-                                .commit();
-                        break;
-                    case R.id.list:
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.containerView, new PolishFragment()).addToBackStack(null)
-                                .commit();
-                        break;
-                    case R.id.favorite:
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.containerView, new FavoriteFragment()).addToBackStack(null)
-                                .commit();
-                        break;
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+            bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.home:
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.containerView, new MenuFragment()).addToBackStack(null)
+                                    .commit();
+                            break;
+                        case R.id.add:
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.containerView, new AddOnFragment()).addToBackStack(null)
+                                    .commit();
+                            break;
+                        case R.id.list:
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.containerView, new PolishFragment()).addToBackStack(null)
+                                    .commit();
+                            break;
+                        case R.id.favorite:
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.containerView, new FavoriteFragment()).addToBackStack(null)
+                                    .commit();
+                            break;
+                    }
+                    return true;
                 }
-                return true;
-            }
-        });
-
-
+            });
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            showHeart(bottomNavigationView, user, db);
+        }
 
 
 
@@ -158,9 +161,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                 .commit();
     }
 
-    public void showHeart(BottomNavigationView bottomNavigationView){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    public void showHeart(BottomNavigationView bottomNavigationView, FirebaseUser user, FirebaseFirestore db){
         db.collection("Polish").document(user.getUid()).collection("PolishDetail")
                 .whereEqualTo("liked", true)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

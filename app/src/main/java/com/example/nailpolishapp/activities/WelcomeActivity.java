@@ -26,12 +26,15 @@ public class WelcomeActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         switchToMain = findViewById(R.id.buttonStart);
+
         switchToMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switchActivities();
             }
         });
+
+
 
         videoBG = findViewById(R.id.videoView);
         // Hook up the VideoView to our UI.

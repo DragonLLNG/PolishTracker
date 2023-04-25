@@ -54,11 +54,11 @@ public class AddOnFragment extends Fragment {
     }
 
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setHasOptionsMenu(true);
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,21 +67,7 @@ public class AddOnFragment extends Fragment {
         binding = FragmentAddOnBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
-//
-//    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-//        inflater.inflate(R.menu.menu, menu);
-//        mListener.goSearch();
-//
-//    }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        if (item.getItemId() == R.id.menu) {
-//
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -230,7 +216,7 @@ public class AddOnFragment extends Fragment {
     public interface AddOnListener {
         void gotoList();
 
-        void goSearch();
+        //void goSearch();
 
         void gotoMenu();
 

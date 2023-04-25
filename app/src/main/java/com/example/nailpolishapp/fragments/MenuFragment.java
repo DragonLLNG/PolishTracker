@@ -2,7 +2,6 @@ package com.example.nailpolishapp.fragments;
 
 import static com.example.nailpolishapp.fragments.PolishFragment.decodeFromFirebaseBase64;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -13,9 +12,6 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -27,8 +23,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.nailpolishapp.R;
-import com.example.nailpolishapp.models.User;
 import com.example.nailpolishapp.databinding.FragmentMenuBinding;
+import com.example.nailpolishapp.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -57,25 +53,24 @@ public class MenuFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu, menu);
-    }
+//    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+//        inflater.inflate(R.menu.menu, menu);
+//    }
 
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.menu) {
-            mListener.goSearch();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @SuppressLint("NonConstantResourceId")
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        if (item.getItemId() == R.id.menu) {
+//            mListener.goSearch();
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-
+        //setHasOptionsMenu(true);
     }
 
     @Override
@@ -229,6 +224,8 @@ public class MenuFragment extends Fragment {
 
 
 
+
+
     MenuListener mListener;
 
     @Override
@@ -242,7 +239,7 @@ public class MenuFragment extends Fragment {
         void gotoAddOn();
         void gotoFavorites();
         void login();
-        void goSearch();
+       // void goSearch();
 
     }
 

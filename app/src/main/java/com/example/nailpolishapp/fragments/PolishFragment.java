@@ -21,9 +21,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.nailpolishapp.models.Polish;
 import com.example.nailpolishapp.R;
 import com.example.nailpolishapp.databinding.FragmentPolishBinding;
+import com.example.nailpolishapp.models.Polish;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,6 +34,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PolishFragment extends Fragment {
 
@@ -67,6 +68,7 @@ public class PolishFragment extends Fragment {
         return binding.getRoot();
     }
 
+    //Search function
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu, menu);
         SearchView searchView = (SearchView) menu.findItem(R.id.menu).getActionView();
@@ -75,13 +77,22 @@ public class PolishFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.d("Favorite", "onQueryTextSubmit: "+query);
-
-                return true;
+                return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 Log.d("Favorite", "onQueryTextSubmit: "+newText);
+
+                newText = newText.toLowerCase();
+                ArrayList<Polish> newList = new ArrayList<>();
+                for (Polish polish: polishArrayList){
+                    String polishName = polish.getName().toLowerCase();
+                    if (polishName.contains(newText)){
+                        newList.add(polish);
+                    }
+                }
+                adapter.setFilter(newList);
                 return true;
             } });
 
@@ -195,6 +206,15 @@ public class PolishFragment extends Fragment {
                 itemView.setOnClickListener(v -> mListener.gotoPolishDetail(polish));
             }
         }
+
+
+        //filter for search function
+        public void setFilter(List<Polish> newList){
+            polishArrayList = new ArrayList<>();
+            polishArrayList.addAll(newList);
+            notifyDataSetChanged();
+        }
+
 
 
     }
