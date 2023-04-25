@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,15 +21,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.nailpolishapp.models.Polish;
 import com.example.nailpolishapp.R;
 import com.example.nailpolishapp.databinding.FragmentPolishDetailBinding;
+import com.example.nailpolishapp.models.Polish;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.Random;
 
 public class PolishDetailFragment extends Fragment {
@@ -99,7 +101,8 @@ public class PolishDetailFragment extends Fragment {
 
         binding.textViewPolishName.setText(mParamPolish.getName());
         binding.textViewPolishType.setText(mParamPolish.getType().toString());
-        binding.textViewDate.setText(mParamPolish.getCreatedAt().toString());
+        binding.textViewDate.setText(DateFormat.getDateTimeInstance().format(mParamPolish.getCreatedAt()));
+        Log.d("POLISHDETAIL", "onViewCreated: " + DateFormat.getDateTimeInstance().format(mParamPolish.getCreatedAt()));
         if(mParamPolish.getComment() !=null) {
             binding.textViewComment.setText(mParamPolish.getComment());
         }
@@ -291,8 +294,6 @@ public class PolishDetailFragment extends Fragment {
 
             }
         });
-
-
     }
 
 
@@ -332,7 +333,7 @@ public class PolishDetailFragment extends Fragment {
 
     public interface DetailListener {
         void gotoList();
-        void goSearch();
+        //void goSearch();
 
     }
 }

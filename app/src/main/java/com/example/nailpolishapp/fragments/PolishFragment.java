@@ -33,6 +33,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -160,7 +161,7 @@ public class PolishFragment extends Fragment {
 
             holder.polishName.setText(polish.getName());
             holder.polishType.setText(polish.getType().toString());
-            holder.date.setText(polish.getCreatedAt().toString());
+            holder.date.setText(DateFormat.getDateInstance().format(polish.getCreatedAt()));
             holder.polishImage.setImageBitmap(selectedImageBitmap);
             if (polish.getImageURL() !=null && !polish.getImageURL().contains("http")) {
                 try {
