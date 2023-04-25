@@ -236,6 +236,5 @@ public class PolishFragment extends Fragment {
 
     public interface PolishFragmentListener {
         void gotoPolishDetail(Polish polish);
-        void goSearch();
     }
 }

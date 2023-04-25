@@ -10,9 +10,12 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,6 +42,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -66,40 +70,37 @@ public class FavoriteFragment extends Fragment {
     }
 
 
-//    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-//        inflater.inflate(R.menu.menu, menu);
-//    }
 
-//    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-//        inflater.inflate(R.menu.menu, menu);
-//        SearchView searchView = (SearchView) menu.findItem(R.id.menu).getActionView();
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                Log.d("Favorite", "onQueryTextSubmit: "+query);
-//
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                Log.d("Favorite", "onQueryTextSubmit: "+newText);
-//                return true;
-//            } });
-//
-//    }
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu, menu);
+        SearchView searchView = (SearchView) menu.findItem(R.id.menu).getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d("Favorite", "onQueryTextSubmit: "+query);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d("Favorite", "onQueryTextSubmit: "+newText);
+                newText = newText.toLowerCase();
+                ArrayList<Polish> newList = new ArrayList<>();
+                for (Polish polish: polishArrayList){
+                    String polishName = polish.getName().toLowerCase();
+                    if (polishName.contains(newText)){
+                        newList.add(polish);
+                    }
+                }
+                adapter.setFilterFavorite(newList);
+                return true;
+            } });
+
+    }
 
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.menu:
-//                mListener.goSearch();
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -189,10 +190,6 @@ public class FavoriteFragment extends Fragment {
                         .load(polish.getImageURL())
                         .into(holder.polishImage);
             }
-
-
-
-
         }
 
         @Override
@@ -255,11 +252,13 @@ public class FavoriteFragment extends Fragment {
                         startActivity(Intent.createChooser(shareIntent, "Share with"));
                     }
                 });
-
-
-
-
             }
+        }
+        //filter for search function
+        public void setFilterFavorite(List<Polish> newList){
+            polishArrayList = new ArrayList<>();
+            polishArrayList.addAll(newList);
+            notifyDataSetChanged();
         }
     }
 
