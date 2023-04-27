@@ -303,9 +303,6 @@ public class PolishDetailFragment extends Fragment {
     }
 
 
-
-
-
     DetailListener mListener;
 
     @Override

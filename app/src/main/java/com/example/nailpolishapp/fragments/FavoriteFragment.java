@@ -51,7 +51,6 @@ public class FavoriteFragment extends Fragment {
     FragmentFavoriteBinding binding;
     ArrayList<Polish> polishArrayList = new ArrayList<>();
     FavoritePolishListAdapter adapter;
-    int heart=0;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
