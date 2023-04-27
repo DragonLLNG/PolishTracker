@@ -53,19 +53,6 @@ public class MenuFragment extends Fragment {
         // Required empty public constructor
     }
 
-//    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-//        inflater.inflate(R.menu.menu, menu);
-//    }
-
-//    @SuppressLint("NonConstantResourceId")
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        if (item.getItemId() == R.id.menu) {
-//            mListener.goSearch();
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

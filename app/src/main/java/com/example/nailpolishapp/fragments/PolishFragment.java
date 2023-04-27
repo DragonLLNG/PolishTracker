@@ -177,8 +177,6 @@ public class PolishFragment extends Fragment {
 
                 Picasso.get()
                         .load(polish.getImageURL())
-//                    .resize(MAX_WIDTH, MAX_HEIGHT)
-//                        .centerCrop()
                         .into(holder.polishImage);
             }
 
