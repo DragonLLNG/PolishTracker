@@ -14,7 +14,6 @@ import com.example.nailpolishapp.fragments.LoginFragment;
 import com.example.nailpolishapp.fragments.MenuFragment;
 import com.example.nailpolishapp.fragments.PolishDetailFragment;
 import com.example.nailpolishapp.fragments.PolishFragment;
-import com.example.nailpolishapp.fragments.SearchFragment;
 import com.example.nailpolishapp.models.Polish;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -87,14 +86,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
             showHeart(bottomNavigationView, user, db);
         }
 
-
-
-
     }
-
-
-
-
 
 
     @Override
@@ -154,12 +146,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
 
     }
 
-    @Override
-    public void goSearch() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.containerView, new SearchFragment()).addToBackStack(null)
-                .commit();
-    }
+
 
     public void showHeart(BottomNavigationView bottomNavigationView, FirebaseUser user, FirebaseFirestore db){
         db.collection("Polish").document(user.getUid()).collection("PolishDetail")

@@ -37,18 +37,12 @@ public class PolishDetailFragment extends Fragment {
 
     private static final String ARG_PARAM_POLISH = "param_polish";
 
-
-
-
-
     private Polish mParamPolish;
 
     FragmentPolishDetailBinding binding;
     public PolishDetailFragment() {
         // Required empty public constructor
     }
-
-
 
 
     public static PolishDetailFragment newInstance(Polish mParamPolish) {
@@ -73,15 +67,6 @@ public class PolishDetailFragment extends Fragment {
         inflater.inflate(R.menu.menu, menu);
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.menu:
-//                mListener.goSearch();
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -125,8 +110,6 @@ public class PolishDetailFragment extends Fragment {
 
             Picasso.get()
                     .load(mParamPolish.getImageURL())
-//                    .resize(MAX_WIDTH, MAX_HEIGHT)
-//                        .centerCrop()
                     .into(binding.imageViewPolish);
         }
 
@@ -333,7 +316,5 @@ public class PolishDetailFragment extends Fragment {
 
     public interface DetailListener {
         void gotoList();
-        //void goSearch();
-
     }
 }

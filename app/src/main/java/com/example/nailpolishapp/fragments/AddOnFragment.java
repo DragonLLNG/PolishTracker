@@ -174,6 +174,8 @@ public class AddOnFragment extends Fragment {
 
 
     }
+
+    //Launch outside resources to get the images
     ActivityResultLauncher<Intent> launchSomeActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
         if (result.getResultCode() == Activity.RESULT_OK) {
             Intent data = result.getData();

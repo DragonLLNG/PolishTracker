@@ -38,7 +38,7 @@ public class WelcomeActivity extends AppCompatActivity{
 
         videoBG = findViewById(R.id.videoView);
         // Hook up the VideoView to our UI.
-        videoBG = (VideoView) findViewById(R.id.videoView);
+        videoBG = findViewById(R.id.videoView);
 
         // Build your video Uri
         Uri uri = Uri.parse("android.resource://" // First start with this,

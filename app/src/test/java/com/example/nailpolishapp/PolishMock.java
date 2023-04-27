@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class PolishMock {
-    private String name;
-    private ArrayList<String> type;
-    private Date createdAt;
+    private final String name;
+    private final ArrayList<String> type;
+    private final Date createdAt;
+
 
     public PolishMock(String name, ArrayList<String> type, Date createdAt) {
         if (name == null || name.isEmpty()) {
@@ -39,6 +40,7 @@ public class PolishMock {
     public Date getCreatedAt() {
         return createdAt;
     }
+
 }
 
 

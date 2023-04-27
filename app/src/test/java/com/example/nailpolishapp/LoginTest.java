@@ -16,7 +16,7 @@ public class LoginTest {
     private static final String INVALID_PASSWORD = "123";
 
     // Define the login service to test
-    private Login login = new Login();
+    private final Login login = new Login();
 
     @Test
     public void testValidLogin() {

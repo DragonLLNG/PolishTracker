@@ -272,7 +272,7 @@ public class FavoriteFragment extends Fragment {
 
     public interface FavoriteListListener {
         void gotoMenu();
-        void goSearch();
+        //void goSearch();
 
     }
 }

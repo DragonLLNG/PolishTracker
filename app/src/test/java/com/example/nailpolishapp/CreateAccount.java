@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CreateAccount {
 
-    private List<UserMock> users = new ArrayList<>();
+    private final List<UserMock> users = new ArrayList<>();
 
     public boolean createAccount(String name, String email, String password) {
         if (!isValidName(name) || !isValidEmail(email) || !isValidPassword(password)) {
@@ -46,11 +46,7 @@ public class CreateAccount {
         }
 
         // Check that the email domain contains at least one character before and after the "." symbol
-        if (dotSymbolIndex == atSymbolIndex + 1 || dotSymbolIndex == email.length() - 2) {
-            return false;
-        }
-
-        return true;
+        return dotSymbolIndex != atSymbolIndex + 1 && dotSymbolIndex != email.length() - 2;
 
     }
 
